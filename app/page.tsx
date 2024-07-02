@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Ativos from "./components/Ativos";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-8">
-      <h1 className="text-4xl font-bold">Ativos</h1>
+    <main className="flex flex-col items-center justify-between">
+      <Ativos />
     </main>
   );
 }
