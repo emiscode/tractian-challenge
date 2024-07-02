@@ -11,12 +11,14 @@ export const fetchCompanies = async (): Promise<Company[]> => {
 
 export const fetchLocations = async (companyId: string) => {
   const response = await fetch(
-    `${API_BASE_URL}/companies/${companyId}/locations`
+    `${API_BASE_URL}/api/companies/${companyId}/locations`
   );
   return response.json();
 };
 
 export const fetchAssets = async (companyId: string) => {
-  const response = await fetch(`${API_BASE_URL}/companies/${companyId}/assets`);
+  const response = await fetch(
+    `${API_BASE_URL}/api/companies/${companyId}/assets`
+  );
   return response.json();
 };

@@ -1,9 +1,21 @@
 "use client";
 
-export default function TreeView() {
+import React from "react";
+import TreeNode from "./TreeNode";
+
+interface TreeViewProps {
+  data: any[];
+  onSelectNode: (node: any) => void;
+}
+
+const TreeView: React.FC<TreeViewProps> = ({ data, onSelectNode }) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-8">
-      <h1 className="text-4xl font-bold">Ativos</h1>
+    <div>
+      {data.map((node) => (
+        <TreeNode key={node.id} node={node} onSelectNode={onSelectNode} />
+      ))}
     </div>
   );
-}
+};
+
+export default TreeView;

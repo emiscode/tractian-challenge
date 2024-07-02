@@ -3,7 +3,7 @@
 import React from "react";
 
 type ButtonProps = {
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary" | "outline";
   className?: string;
   children: React.ReactNode;
 };
@@ -19,6 +19,10 @@ const Button: React.FC<ButtonProps> = ({ variant, className, children }) => {
       break;
     case "secondary":
       variantStyle = "bg-secondary-blue text-white";
+      break;
+    case "outline":
+      variantStyle =
+        "bg-white text-gray-800 hover:bg-secondary-blue hover:text-white border border-secondary";
       break;
     default:
       break;
