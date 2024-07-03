@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import TreeView from "./TreeView";
 import { useAssetStore } from "@/store/assetsStore";
+import { SearchIcon } from "lucide-react";
 
 interface SidebarProps {
   treeData: any[];
@@ -58,13 +59,16 @@ const Sidebar: React.FC<SidebarProps> = ({ treeData, onSelectNode }) => {
 
   return (
     <aside className="w-1/2 bg-slate-50 pb-4 border border-gray-200">
-      <input
-        type="text"
-        value={searchQuery}
-        placeholder="Buscar ativo ou local"
-        className="w-full p-2 pl-4 border-b border-gray-200"
-        onChange={handleFilterBySearch}
-      />
+      <div className="relative">
+        <SearchIcon className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-400" />
+        <input
+          type="text"
+          value={searchQuery}
+          placeholder="Buscar ativo ou local"
+          className="w-full p-2 pl-4 border-b border-gray-200"
+          onChange={handleFilterBySearch}
+        />
+      </div>
       <TreeView data={filteredData} onSelectNode={onSelectNode} />
     </aside>
   );

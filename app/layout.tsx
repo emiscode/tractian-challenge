@@ -9,6 +9,7 @@ import { useAssetStore } from "@/store/assetsStore";
 import { AssetTree } from "./types";
 import { FullScreenLoading } from "@/components/ui/FullScreenLoading";
 import { Building2Icon, BuildingIcon } from "lucide-react";
+import Logo from "@/components/svg/Logo";
 
 export default function RootLayout({
   children,
@@ -47,7 +48,9 @@ export default function RootLayout({
       <body>
         {isLoading && <FullScreenLoading dark={true} />}
         <header className="flex justify-between items-center w-full px-6 py-4 shadow-md bg-background-blue">
-          <div className="text-white text-xl font-semi">Tractian</div>
+          <div className="text-white text-xl font-semi">
+            <Logo />
+          </div>
           <div className="flex">
             {assets &&
               assets.map((asset: AssetTree) => (
