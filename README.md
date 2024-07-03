@@ -4,7 +4,7 @@
 
 ## Demo
 
-- Vercel Deploy: https://tractian-challenge-6venp34aa-emiscodes-projects.vercel.app/
+- Vercel Deploy: https://tractian-challenge-sigma.vercel.app
 
 - Video 1: [Tractian Challenge Demo - English](https://www.loom.com/share/bcdea8fccc5f4f4fa6f9420c4db48b00?sid=d04fcca2-d45c-4cb5-9de1-e48c6baca28a)
 
