@@ -10,7 +10,7 @@ interface TreeViewProps {
 
 const TreeView: React.FC<TreeViewProps> = ({ data, onSelectNode }) => {
   return (
-    <div>
+    <div className="pt-4">
       {data &&
         data.length > 0 &&
         data.map((node) => (
