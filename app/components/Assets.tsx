@@ -8,13 +8,12 @@ import Sidebar from "./Sidebar";
 import AssetContent from "./AssetContent";
 
 export default function Assets() {
-  const { assets } = useAssetStore();
+  const { assets, isFiltered, setIsFiltered } = useAssetStore();
   const [treeData, setTreeData] = useState<any[]>([]);
   const [selectedNode, setSelectedNode] = useState<any>(null);
   const selectedAsset = assets.find((asset) => asset.selected);
   const [isFilteredBySensor, setIsFilteredBySensor] = useState(false);
   const [isFilteredByAlert, setIsFilteredByAlert] = useState(false);
-  const isFiltered = isFilteredBySensor || isFilteredByAlert;
 
   const handleSelectNode = (node: any) => {
     setSelectedNode(node);
@@ -48,6 +47,7 @@ export default function Assets() {
   const handleFilterSensorClick = () => {
     if (isFilteredBySensor) {
       setIsFilteredBySensor(false);
+      setIsFiltered(false);
       return;
     }
 
@@ -56,12 +56,14 @@ export default function Assets() {
     if (filteredTree) {
       setTreeData([filteredTree]);
       setIsFilteredBySensor(true);
+      setIsFiltered(true);
     }
   };
 
   const handleFilterAlertClick = () => {
     if (isFilteredByAlert) {
       setIsFilteredByAlert(false);
+      setIsFiltered(false);
       return;
     }
 
@@ -70,6 +72,7 @@ export default function Assets() {
     if (filteredTree) {
       setTreeData([filteredTree]);
       setIsFilteredByAlert(true);
+      setIsFiltered(true);
     }
   };
 
@@ -134,6 +137,8 @@ export default function Assets() {
     };
 
     if (isFiltered) return;
+    setIsFilteredBySensor(false);
+    setIsFilteredByAlert(false);
     loadData();
   }, [selectedAsset, isFiltered]);
 

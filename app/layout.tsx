@@ -19,6 +19,7 @@ export default function RootLayout({
     addAsset,
     reset: resetAssetStore,
     updateSelectedAsset,
+    setIsFiltered,
   } = useAssetStore();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function RootLayout({
         selected: index === 0,
       });
     });
-  }, [addAsset, companiesData]);
+  }, [addAsset, companiesData, setIsFiltered]);
 
   return (
     <html lang="en">

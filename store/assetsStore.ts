@@ -6,6 +6,7 @@ import { AssetTree } from "@/app/types";
 interface AssetState {
   updated: string;
   assets: AssetTree[];
+  isFiltered: boolean;
 }
 
 interface AssetActions {
@@ -13,6 +14,7 @@ interface AssetActions {
   setUpdated: () => void;
   addAsset: (asset: AssetTree) => void;
   updateSelectedAsset: (asset: AssetTree) => void;
+  setIsFiltered: (isFiltered: boolean) => void;
 }
 
 type AssetStore = AssetState & AssetActions;
@@ -20,6 +22,7 @@ type AssetStore = AssetState & AssetActions;
 const initialState: AssetState = {
   updated: "",
   assets: [],
+  isFiltered: false,
 };
 
 export const useAssetStore = managedStoreCreate<AssetStore>()(
@@ -39,8 +42,10 @@ export const useAssetStore = managedStoreCreate<AssetStore>()(
           ),
         }));
         get().setUpdated();
+        get().setIsFiltered(false);
       },
       setUpdated: () => set({ updated: new Date().toISOString() }),
+      setIsFiltered: (isFiltered: boolean) => set({ isFiltered }),
       reset: () => set(initialState),
     }),
     {
