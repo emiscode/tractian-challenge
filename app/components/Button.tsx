@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
       break;
     case "outline":
       variantStyle =
-        "bg-white text-gray-800 hover:bg-secondary-blue hover:text-white border border-secondary";
+        "bg-white text-primary-blue hover:bg-secondary-blue hover:text-white border border-secondary";
       break;
     default:
       break;

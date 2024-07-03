@@ -2,7 +2,7 @@
 
 import { Company } from "./types";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = process.env.API_BASE_URL;
 
 export const fetchCompanies = async (): Promise<Company[]> => {
   const response = await fetch(`${API_BASE_URL}/api/companies`);

@@ -15,7 +15,7 @@ const AssetContent: React.FC<AssetContentProps> = ({ selectedNode }) => {
       ) : (
         <div className="flex w-full justify-center p-4">
           <p className="text-gray-800 font-bold">
-            Select an asset to view details
+            Selecione um ativo para ver detalhes
           </p>
         </div>
       )}

@@ -7,13 +7,18 @@ import { useEffect } from "react";
 import Button from "./components/Button";
 import { useAssetStore } from "@/store/assetsStore";
 import { AssetTree } from "./types";
+import { FullScreenLoading } from "@/components/ui/FullScreenLoading";
+import { Building2Icon, BuildingIcon } from "lucide-react";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data: companiesData } = useSWR("companies", fetchCompanies);
+  const { data: companiesData, isLoading } = useSWR(
+    "companies",
+    fetchCompanies
+  );
   const {
     assets,
     addAsset,
@@ -41,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        {isLoading && <FullScreenLoading dark={true} />}
         <header className="flex justify-between items-center w-full px-6 py-4 shadow-md bg-background-blue">
           <div className="text-white text-xl font-semi">Tractian</div>
           <div className="flex">
@@ -49,9 +55,10 @@ export default function RootLayout({
                 <Button
                   key={asset.companyId}
                   variant={asset.selected ? "secondary" : "primary"}
-                  className="mx-2 text-muted-foreground"
+                  className="mx-2 text-muted-foreground flex gap-x-2 items-center"
                   onClick={() => updateSelectedAsset(asset)}
                 >
+                  <Building2Icon className="w-4 h-4 text-white" />
                   {asset.companyName}
                 </Button>
               ))}

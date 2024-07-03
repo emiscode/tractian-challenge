@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { fetchAssets, fetchLocations } from "../actions";
 import Sidebar from "./Sidebar";
 import AssetContent from "./AssetContent";
+import { ZapIcon } from "lucide-react";
 
 export default function Assets() {
   const { assets, isFiltered, setIsFiltered } = useAssetStore();
@@ -157,15 +158,19 @@ export default function Assets() {
         </h1>
         <div className="flex gap-x-4">
           <Button
+            className="flex gap-x-1 items-center"
             variant={isFilteredBySensor ? "secondary" : "outline"}
             onClick={handleFilterSensorClick}
           >
+            <ZapIcon className="w-4 h-4 text-primary-blue" />
             Sensor de Energia
           </Button>
           <Button
+            className="flex gap-x-1 items-center"
             variant={isFilteredByAlert ? "secondary" : "outline"}
             onClick={handleFilterAlertClick}
           >
+            <ZapIcon className="w-4 h-4 text-primary-blue" />
             Crítico
           </Button>
         </div>
