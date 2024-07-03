@@ -26,8 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/companies/[id]",
-    "app/api/companies/[id]"
+    "app/companies/[id]",
+    "app/companies/[id]"
   ],
   "exclude": ["node_modules"]
 }
