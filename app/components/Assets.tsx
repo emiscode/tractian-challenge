@@ -2,14 +2,14 @@
 
 import { useAssetStore } from "@/store/assetsStore";
 import Button from "./Button";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { fetchAssets, fetchLocations } from "../actions";
 import Sidebar from "./Sidebar";
 import AssetContent from "./AssetContent";
 import { ZapIcon } from "lucide-react";
 
 export default function Assets() {
-  const { assets, isFiltered, setIsFiltered } = useAssetStore();
+  const { assets, isFiltered, setIsFiltered, updated } = useAssetStore();
   const [treeData, setTreeData] = useState<any[]>([]);
   const [selectedNode, setSelectedNode] = useState<any>(null);
   const selectedAsset = assets.find((asset) => asset.selected);
@@ -146,6 +146,10 @@ export default function Assets() {
     setIsFilteredByAlert(false);
     loadData();
   }, [selectedAsset, isFiltered]);
+
+  useEffect(() => {
+    setSelectedNode(null);
+  }, [updated]);
 
   return (
     <div className="w-full flex flex-col gap-y-4">

@@ -16,7 +16,6 @@ const Sidebar: React.FC<SidebarProps> = ({ treeData, onSelectNode }) => {
 
   useEffect(() => {
     setFilteredData(treeData);
-    console.log({ treeData });
   }, [treeData]);
 
   const filterAssets = useCallback((node: any, filter: string) => {

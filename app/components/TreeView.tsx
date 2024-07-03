@@ -9,7 +9,6 @@ interface TreeViewProps {
 }
 
 const TreeView: React.FC<TreeViewProps> = ({ data, onSelectNode }) => {
-  console.log({ data });
   return (
     <div className="pt-4">
       {data &&
