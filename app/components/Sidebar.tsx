@@ -52,10 +52,10 @@ const Sidebar: React.FC<SidebarProps> = ({ treeData, onSelectNode }) => {
   }, [filterAssets, searchQuery, treeData, setIsFiltered]);
 
   useEffect(() => {
-    if (isFiltered) return;
+    if (isFiltered || searchQuery) return;
     setFilteredData(treeData);
     setSearchQuery("");
-  }, [isFiltered, treeData]);
+  }, [isFiltered, treeData, searchQuery]);
 
   return (
     <aside className="w-1/2 bg-slate-50 pb-4 border border-gray-200">

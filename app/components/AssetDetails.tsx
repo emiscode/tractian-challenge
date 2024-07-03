@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import AssetStatusIndicator from "./AssetStatusIndicator";
+import AssetStatusBadge from "./AssetStatusBadge";
 
 interface AssetDetailsProps {
   asset: any;
@@ -9,7 +11,12 @@ interface AssetDetailsProps {
 const AssetDetails: React.FC<AssetDetailsProps> = ({ asset }) => {
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-4">{asset.name}</h2>
+      <div>
+        <h2 className="text-2xl font-semibold mb-4 flex items-center">
+          {asset.name}
+          <AssetStatusIndicator status={asset.status} />
+        </h2>
+      </div>
       <div className="space-y-2">
         {asset.type && (
           <div>
@@ -23,7 +30,10 @@ const AssetDetails: React.FC<AssetDetailsProps> = ({ asset }) => {
         )}
         {asset.status && (
           <div>
-            <strong>Status:</strong> {asset.status}
+            <strong>Status:</strong>{" "}
+            <AssetStatusBadge variant={asset.status}>
+              {asset.status}
+            </AssetStatusBadge>
           </div>
         )}
         {asset.gatewayId && (
