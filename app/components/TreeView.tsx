@@ -9,12 +9,13 @@ interface TreeViewProps {
 }
 
 const TreeView: React.FC<TreeViewProps> = ({ data, onSelectNode }) => {
+  console.log({ data });
   return (
     <div className="pt-4">
       {data &&
         data.length > 0 &&
-        data.map((node) => (
-          <TreeNode key={node.id} node={node} onSelectNode={onSelectNode} />
+        data.map((node, index) => (
+          <TreeNode key={index} node={node} onSelectNode={onSelectNode} />
         ))}
     </div>
   );

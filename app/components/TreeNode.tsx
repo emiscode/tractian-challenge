@@ -6,8 +6,11 @@ import {
   CpuChipIcon,
   CubeIcon,
 } from "@heroicons/react/16/solid";
-import { LocateIcon } from "lucide-react";
 import React, { useState } from "react";
+import LocateIcon from "./LocateIcon";
+import AssetIcon from "./AssetIcon";
+import ComponentIcon from "./ComponentIcon";
+import AssetStatusIndicator from "./AssetStatusIndicator";
 
 interface TreeNodeProps {
   node: any;
@@ -23,11 +26,11 @@ const TreeNode: React.FC<TreeNodeProps> = ({ node, onSelectNode }) => {
   const renderIcon = () => {
     switch (node.type) {
       case "location":
-        return <LocateIcon className="h-5 w-5 text-blue-500" />;
+        return <LocateIcon />;
       case "asset":
-        return <CubeIcon className="h-5 w-5 text-green-500" />;
+        return <AssetIcon />;
       case "component":
-        return <CpuChipIcon className="h-5 w-5 text-yellow-500" />;
+        return <ComponentIcon />;
       default:
         return null;
     }
@@ -46,7 +49,10 @@ const TreeNode: React.FC<TreeNodeProps> = ({ node, onSelectNode }) => {
             <ChevronRightIcon className="h-5 w-5" />
           ))}
         {renderIcon()}
-        <span onClick={handleSelect}>{node.name}</span>
+        <div>
+          <span onClick={handleSelect}>{node.name}</span>
+          <AssetStatusIndicator status={node.status} />
+        </div>
       </div>
       {isExpanded && node.children && (
         <div className="pl-4">

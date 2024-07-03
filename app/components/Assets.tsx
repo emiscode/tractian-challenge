@@ -51,10 +51,12 @@ export default function Assets() {
       return;
     }
 
-    const filteredTree = filterAssets(treeData[0], "energy");
+    const filteredTree = treeData
+      .map((node) => filterAssets(node, "energy"))
+      .filter(Boolean) as any[];
 
     if (filteredTree) {
-      setTreeData([filteredTree]);
+      setTreeData(filteredTree);
       setIsFilteredBySensor(true);
       setIsFiltered(true);
     }
@@ -67,10 +69,12 @@ export default function Assets() {
       return;
     }
 
-    const filteredTree = filterAssets(treeData[0], "alert");
+    const filteredTree = treeData
+      .map((node) => filterAssets(node, "alert"))
+      .filter(Boolean) as any[];
 
     if (filteredTree) {
-      setTreeData([filteredTree]);
+      setTreeData(filteredTree);
       setIsFilteredByAlert(true);
       setIsFiltered(true);
     }

@@ -12,11 +12,11 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ treeData, onSelectNode }) => {
   const [filteredData, setFilteredData] = useState<any[]>(treeData);
   const { isFiltered, setIsFiltered } = useAssetStore();
-  const [isFilteredBySearch, setIsFilteredBySearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setFilteredData(treeData);
+    console.log({ treeData });
   }, [treeData]);
 
   const filterAssets = useCallback((node: any, filter: string) => {
