@@ -12,7 +12,7 @@ interface AssetActions {
   reset: () => void;
   setUpdated: () => void;
   addAsset: (asset: AssetTree) => void;
-  updateAsset: (asset: AssetTree) => void;
+  updateSelectedAsset: (asset: AssetTree) => void;
 }
 
 type AssetStore = AssetState & AssetActions;
@@ -30,12 +30,12 @@ export const useAssetStore = managedStoreCreate<AssetStore>()(
         set((state) => ({ assets: [...state.assets, asset] }));
         get().setUpdated();
       },
-      updateAsset: (asset: AssetTree) => {
+      updateSelectedAsset: (selectedAsset: AssetTree) => {
         set((state) => ({
           assets: state.assets.map((currentAsset: AssetTree) =>
-            currentAsset.companyId === asset.companyId
-              ? { ...currentAsset, ...asset }
-              : currentAsset
+            currentAsset.companyId === selectedAsset.companyId
+              ? { ...currentAsset, selected: true }
+              : { ...currentAsset, selected: false }
           ),
         }));
         get().setUpdated();

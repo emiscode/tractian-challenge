@@ -14,7 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const { data: companiesData } = useSWR("companies", fetchCompanies);
-  const { assets, addAsset, reset: resetAssetStore } = useAssetStore();
+  const {
+    assets,
+    addAsset,
+    reset: resetAssetStore,
+    updateSelectedAsset,
+  } = useAssetStore();
 
   useEffect(() => {
     resetAssetStore();
@@ -39,11 +44,12 @@ export default function RootLayout({
           <div className="text-white text-xl font-semi">Tractian</div>
           <div className="flex">
             {assets &&
-              assets.map((asset: AssetTree, index: number) => (
+              assets.map((asset: AssetTree) => (
                 <Button
                   key={asset.companyId}
                   variant={asset.selected ? "secondary" : "primary"}
                   className="mx-2 text-muted-foreground"
+                  onClick={() => updateSelectedAsset(asset)}
                 >
                   {asset.companyName}
                 </Button>

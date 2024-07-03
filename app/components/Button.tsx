@@ -6,9 +6,15 @@ type ButtonProps = {
   variant: "primary" | "secondary" | "outline";
   className?: string;
   children: React.ReactNode;
+  onClick: () => void;
 };
 
-const Button: React.FC<ButtonProps> = ({ variant, className, children }) => {
+const Button: React.FC<ButtonProps> = ({
+  variant,
+  className,
+  children,
+  onClick: handdleOnClick,
+}) => {
   const baseStyle =
     "px-4 rounded focus:outline-none focus:shadow-outline text-sm py-2";
   let variantStyle = "";
@@ -18,7 +24,8 @@ const Button: React.FC<ButtonProps> = ({ variant, className, children }) => {
       variantStyle = "bg-primary-blue text-white hover:bg-secondary-blue";
       break;
     case "secondary":
-      variantStyle = "bg-secondary-blue text-white";
+      variantStyle =
+        "bg-secondary-blue text-white border border-secondary-blue";
       break;
     case "outline":
       variantStyle =
@@ -29,7 +36,10 @@ const Button: React.FC<ButtonProps> = ({ variant, className, children }) => {
   }
 
   return (
-    <button className={`${baseStyle} ${variantStyle} ${className}`}>
+    <button
+      className={`${baseStyle} ${variantStyle} ${className}`}
+      onClick={handdleOnClick}
+    >
       {children}
     </button>
   );

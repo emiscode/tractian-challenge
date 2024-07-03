@@ -12,9 +12,65 @@ export default function Assets() {
   const [treeData, setTreeData] = useState<any[]>([]);
   const [selectedNode, setSelectedNode] = useState<any>(null);
   const selectedAsset = assets.find((asset) => asset.selected);
+  const [isFilteredBySensor, setIsFilteredBySensor] = useState(false);
+  const [isFilteredByAlert, setIsFilteredByAlert] = useState(false);
+  const isFiltered = isFilteredBySensor || isFilteredByAlert;
 
   const handleSelectNode = (node: any) => {
     setSelectedNode(node);
+  };
+
+  const filterAssets = (node: any, filter: "energy" | "alert"): any | null => {
+    switch (filter) {
+      case "energy":
+        if (node.sensorType === filter) {
+          return { ...node };
+        }
+        break;
+      case "alert":
+        if (node.status === filter) {
+          return { ...node };
+        }
+        break;
+    }
+
+    const filteredChildren = node.children
+      .map((child: any) => filterAssets(child, filter))
+      .filter(Boolean) as any[];
+
+    if (filteredChildren.length > 0) {
+      return { ...node, children: filteredChildren };
+    }
+
+    return null;
+  };
+
+  const handleFilterSensorClick = () => {
+    if (isFilteredBySensor) {
+      setIsFilteredBySensor(false);
+      return;
+    }
+
+    const filteredTree = filterAssets(treeData[0], "energy");
+
+    if (filteredTree) {
+      setTreeData([filteredTree]);
+      setIsFilteredBySensor(true);
+    }
+  };
+
+  const handleFilterAlertClick = () => {
+    if (isFilteredByAlert) {
+      setIsFilteredByAlert(false);
+      return;
+    }
+
+    const filteredTree = filterAssets(treeData[0], "alert");
+
+    if (filteredTree) {
+      setTreeData([filteredTree]);
+      setIsFilteredByAlert(true);
+    }
   };
 
   useEffect(() => {
@@ -24,7 +80,6 @@ export default function Assets() {
       const locationsData = await fetchLocations(selectedAsset.companyId);
       const assetsData = await fetchAssets(selectedAsset.companyId);
 
-      // Structure data
       const locationsMap = new Map();
       const assetsMap = new Map();
 
@@ -45,7 +100,6 @@ export default function Assets() {
         });
       });
 
-      // Build tree
       const tree: any = [];
 
       locationsData.forEach((location: any) => {
@@ -79,16 +133,32 @@ export default function Assets() {
       setTreeData(tree);
     };
 
+    if (isFiltered) return;
     loadData();
-  }, [selectedAsset]);
+  }, [selectedAsset, isFiltered]);
 
   return (
     <div className="w-full flex flex-col gap-y-4">
       <div className="w-full flex justify-between items-center">
-        <h1>Ativos / {selectedAsset?.companyName}</h1>
+        <h1 className="font-bold">
+          Ativos{" "}
+          <span className="text-gray-600 font-normal">
+            / {selectedAsset?.companyName}
+          </span>
+        </h1>
         <div className="flex gap-x-4">
-          <Button variant="outline">Sensor de Energia</Button>
-          <Button variant="outline">Crítico</Button>
+          <Button
+            variant={isFilteredBySensor ? "secondary" : "outline"}
+            onClick={handleFilterSensorClick}
+          >
+            Sensor de Energia
+          </Button>
+          <Button
+            variant={isFilteredByAlert ? "secondary" : "outline"}
+            onClick={handleFilterAlertClick}
+          >
+            Crítico
+          </Button>
         </div>
       </div>
       <div className="w-full flex gap-x-2">
